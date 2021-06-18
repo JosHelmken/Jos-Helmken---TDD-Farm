@@ -1,0 +1,23 @@
+{
+  "name": "jos-helmken---tdd-farm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JosHelmken/Jos-Helmken---TDD-Farm.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JosHelmken/Jos-Helmken---TDD-Farm/issues"
+  },
+  "homepage": "https://github.com/JosHelmken/Jos-Helmken---TDD-Farm#readme",
+  "devDependencies": {
+    "jest": "^27.0.4"
+  }
+}
