@@ -1,4 +1,73 @@
-const { getYieldForPlant, getYieldForCrop, getTotalYield, getCostsForCrop } = require("./farm");
+const { 
+  getYieldForPlant, 
+  getYieldForCrop, 
+  getTotalYield, 
+  getCostsForCrop, 
+  getRevenueForCrop,
+  getProfitForCrop
+ } = require("./farm");
+
+describe("getProfitForCrop", () => {
+  
+    test("Get the Profit for Crop", () => {
+
+      const corn = {
+        name: "corn",
+        cost: 1,
+        price: 3,
+        yield: 3,
+      };
+
+      const pumpkin = {
+        name: "pumpkin",
+        cost: 3,
+        price: 3,
+        yield: 4,
+      };
+
+      const crops = [
+        { crop: corn, numCrops: 5 },
+        { crop: pumpkin, numCrops: 2 },
+      ];
+
+      const expectedProfit = [40, 18];
+      const cropProfit = crops.map(plant => getProfitForCrop(plant));
+    
+    expect(cropProfit).toEqual(expectedProfit);
+    
+    });
+});
+
+describe("getRevenueForCrop", () => {
+  
+    test("Get the Revenue for Crop", () => {
+
+      const corn = {
+        name: "corn",
+        cost: 1,
+        price: 3,
+        yield: 3,
+      };
+
+      const pumpkin = {
+        name: "pumpkin",
+        cost: 3,
+        price: 3,
+        yield: 4,
+      };
+
+      const crops = [
+        { crop: corn, numCrops: 5 },
+        { crop: pumpkin, numCrops: 2 },
+      ];
+
+      const expectedRevenue = [45, 24];
+      const cropRevenue = crops.map(plant => getRevenueForCrop(plant));
+    
+    expect(cropRevenue).toEqual(expectedRevenue);
+    
+    });
+});
 
 describe("getCostsForCrop", () => {
   
