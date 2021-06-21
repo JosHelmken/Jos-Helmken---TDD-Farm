@@ -8,30 +8,60 @@ const {
   getTotalProfit
  } = require("./farm");
 
+// Variables //
+const corn = {
+  name: 'corn',
+  yield: 30,
+  cost: 1,
+  price: 3,
+  factors: {
+    sun: {
+      low: -50,
+      medium: 0,
+      high: 50,
+    },
+  },
+};
+
+const pumpkin = {
+  name: 'pumpkin',
+  yield: 8,
+  cost: 3,
+  price: 3,
+  
+  factors: {
+    sun: {
+      low: -50,
+      medium: 0,
+      high: 20,
+    },
+    temp: {
+      low: -100,
+      medium: 25,
+      high: 100,
+    },
+  },
+};
+
+const yieldFactors = {
+  sun: 'low',
+  temp: 'high'
+};
+
+
+
+ // --- Testing suite --- //
+ 
 describe("getTotalProfit", () => {
   
     test("Get the Total Profit", () => {
-
-      const corn = {
-        name: "corn",
-        cost: 1,
-        price: 3,
-        yield: 3,
-      };
-
-      const pumpkin = {
-        name: "pumpkin",
-        cost: 3,
-        price: 3,
-        yield: 4,
-      };
 
       const crops = [
         { crop: corn, numCrops: 5 },
         { crop: pumpkin, numCrops: 2 },
       ];
 
-      const expectedProfit = 58;
+      const expectedProfit = 487;
       const calculatedProfit = getTotalProfit(crops);
     
     expect(calculatedProfit).toEqual(expectedProfit);
@@ -43,26 +73,12 @@ describe("getProfitForCrop", () => {
   
     test("Get the Profit for Crop", () => {
 
-      const corn = {
-        name: "corn",
-        cost: 1,
-        price: 3,
-        yield: 3,
-      };
-
-      const pumpkin = {
-        name: "pumpkin",
-        cost: 3,
-        price: 3,
-        yield: 4,
-      };
-
-      const crops = [
+    const crops = [
         { crop: corn, numCrops: 5 },
         { crop: pumpkin, numCrops: 2 },
       ];
 
-      const expectedProfit = [40, 18];
+      const expectedProfit = [445, 42];
       const cropProfit = crops.map(plant => getProfitForCrop(plant));
     
     expect(cropProfit).toEqual(expectedProfit);
@@ -74,26 +90,12 @@ describe("getRevenueForCrop", () => {
   
     test("Get the Revenue for Crop", () => {
 
-      const corn = {
-        name: "corn",
-        cost: 1,
-        price: 3,
-        yield: 3,
-      };
-
-      const pumpkin = {
-        name: "pumpkin",
-        cost: 3,
-        price: 3,
-        yield: 4,
-      };
-
-      const crops = [
+    const crops = [
         { crop: corn, numCrops: 5 },
         { crop: pumpkin, numCrops: 2 },
       ];
 
-      const expectedRevenue = [45, 24];
+      const expectedRevenue = [450, 48];
       const cropRevenue = crops.map(plant => getRevenueForCrop(plant));
     
     expect(cropRevenue).toEqual(expectedRevenue);
@@ -105,19 +107,7 @@ describe("getCostsForCrop", () => {
   
     test("Get the Cost for Crop", () => {
 
-      const corn = {
-        name: "corn",
-        cost: 1,
-        yield: 3,
-      };
-
-      const pumpkin = {
-        name: "pumpkin",
-        cost: 3,
-        yield: 4,
-      };
-
-      const crops = [
+    const crops = [
         { crop: corn, numCrops: 5 },
         { crop: pumpkin, numCrops: 2 },
       ];
