@@ -1,9 +1,35 @@
-// crops [ {crop { name , yield } , numCrops } ]
-const getYieldForPlant = plant => plant.yield; // gives back a number 
-const getYieldForCrop = crop => getYieldForPlant(crop.crop) * crop.numCrops;
+const getYieldForPlant = (plant, factors) => {
+  const getPlantFactors = plant.factors;
+  const impactValue = [];
+  
+  if(factors && getPlantFactors) {
 
-const getTotalYield = cropArray => {
-  const cropYield = cropArray.crops.map( x => getYieldForCrop(x));
+    Object.keys(getPlantFactors).forEach(keyword => {
+      
+      const factorKeyword = factors[keyword];
+      const impact = getPlantFactors[keyword][factorKeyword];
+      impactValue.push((100 + impact) / 100);
+     
+    });
+    
+    const newYield = impactValue.reduce((acum, value) => {    
+      return acum * value;
+    }, plant.yield);
+
+    return Math.round(newYield);
+
+
+  } else {
+    return plant.yield; 
+  }
+};
+
+
+const getYieldForCrop = (crop, factors) => getYieldForPlant(crop.crop, factors) * crop.numCrops;
+
+
+const getTotalYield = (cropArray, factors) => {
+  const cropYield = cropArray.crops.map( crop => getYieldForCrop(crop, factors));
   const totalYield = cropYield.reduce((acum, value) => acum + value);
   return totalYield;
 }
@@ -16,16 +42,16 @@ const getCostsForCrop = crop => {
 
 }
 
-const getRevenueForCrop = crop => {
+const getRevenueForCrop = (crop, factors) => {
   const price = crop.crop.price;
-  const cropYield = getYieldForCrop(crop);
+  const cropYield = getYieldForCrop(crop, factors);
 
   return Math.round(price * cropYield);
 }
 
-const getProfitForCrop = crop => {
+const getProfitForCrop = (crop, factors) => {
   const price = getCostsForCrop(crop);
-  const revenue = getRevenueForCrop(crop);
+  const revenue = getRevenueForCrop(crop, factors);
 
   return Math.round(revenue - price);
 }
@@ -38,11 +64,6 @@ const getTotalProfit = crops => {
 
 
 }
-
-
-
-
-
 
 module.exports = {
   getYieldForPlant,
