@@ -4,7 +4,7 @@ const getYieldForCrop = crop => getYieldForPlant(crop.crop) * crop.numCrops;
 
 const getTotalYield = cropArray => {
   const cropYield = cropArray.crops.map( x => getYieldForCrop(x));
-  const totalYield = cropYield.reduce((a,b) => a + b);
+  const totalYield = cropYield.reduce((acum, value) => acum + value);
   return totalYield;
 }
 
@@ -30,7 +30,14 @@ const getProfitForCrop = crop => {
   return Math.round(revenue - price);
 }
 
+const getTotalProfit = crops => {
+  const cropProfit = crops.map(crop => getProfitForCrop(crop));
+  const totalProfit = cropProfit.reduce((acum, value) => acum + value);
 
+  return Math.round(totalProfit);
+
+
+}
 
 
 
@@ -43,5 +50,6 @@ module.exports = {
   getTotalYield,
   getCostsForCrop,
   getRevenueForCrop,
-  getProfitForCrop
+  getProfitForCrop,
+  getTotalProfit
   };
